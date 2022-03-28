@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Gudang\dashboardController;
+use App\Http\Controllers\Gudang\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,9 @@ use App\Http\Controllers\Gudang\dashboardController;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/', [dashboardController::class, 'index'])->name('dashboard.index');
+    
+    Route::prefix('barang')->name('barang.')->group(function() {
+        Route::get('/', [BarangController::class, 'index'])->name('index');
+        Route::get('/create', [BarangController::class, 'create'])->name('create');
+    });
 });
